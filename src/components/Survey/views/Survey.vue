@@ -11,7 +11,7 @@
         <div class="cell small-12 medium-6 medium-offset-3">
           <div class="survey-introduction" v-if="$route.name === 'index'">
             <h1>👋 Welcome to the Thriva front-end coding challenge</h1><br/><br/>
-            <p>Instructions for the challenge can be found in in the Instructions folder.</p>
+            <p>Instructions for the challenge can be found in the Instructions folder.</p>
             <p>You can find stage one of the survey
               <router-link to="/name">here</router-link>.
             </p>
