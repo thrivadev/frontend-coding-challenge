@@ -2,44 +2,68 @@
   import CheckButton from '@/components/Survey/components/CheckButton'
   import ThvButton from '@/components/Shared/Button'
 
+  const getSelectedGoals = (goals) => {
+    return Object.fromEntries(
+      Object.entries(goals).filter(([key, value]) => value.selected === true)
+    )
+  }
+
   export default {
     name: 'Goals',
     components: {
       ThvButton,
       CheckButton
     },
-    props: {
-      name: {
-        type: String,
-        default: ''
-      }
-    },
     data () {
       return {
         goals: {
           improveEnergy: {
-            name: 'Energy'
+            name: 'Energy',
+            value: 'improveEnergy',
+            selected: false
           },
           improveFitness: {
-            name: 'Fitness'
+            name: 'Fitness',
+            value: 'improveFitness',
+            selected: false
           },
           improveLongTermHealth: {
-            name: 'Long-term health'
+            name: 'Long-term health',
+            value: 'improveLongTermHealth',
+            selected: false
           },
           improveMood: {
-            name: 'Mood'
+            name: 'Mood',
+            value: 'improveMood',
+            selected: false
           },
           improveSleep: {
-            name: 'Sleep'
+            name: 'Sleep',
+            value: 'improveSleep',
+            selected: false
           },
           improveWeight: {
-            name: 'Weight'
+            name: 'Weight',
+            value: 'improveWeight',
+            selected: false
           }
         }
       }
     },
     methods: {
+      toggleGoal (value, text) {
+        if (this.goals[value].name === text) {
+          this.goals[value].selected = this.goals[value].selected = this.goals[value].selected
+            ? !this.goals[value].selected
+            : Object.keys(getSelectedGoals(this.goals)).length < 4
+              ? !this.goals[value].selected
+              : this.goals[value].selected
+        }
+      },
       submit () {
+        const selectedGoals = getSelectedGoals(this.goals)
+  
+        this.$store.commit('survey/saveGoals', selectedGoals)
         this.$router.push('/diet')
       },
       back () {
@@ -57,7 +81,7 @@
         <h1>Nice to meet you {{ this.$store.state.survey.name }}. What would you like to focus on?</h1>
         <p class="body--large question-description">Choose up to four</p>
         <div class="spacer sp__top--sm"></div>
-        <check-button v-for="(goal, key) in goals" :key="key" :text="goal.name"></check-button>
+        <check-button @click="toggleGoal" v-for="(goal, key) in goals" :key="key" :text="goal.name" :value="goal.value" :selected="goal.selected" ></check-button>
         <div class="grid-x button-container">
           <div class="cell auto">
             <div class="back-button-container">
