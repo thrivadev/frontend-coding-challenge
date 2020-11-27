@@ -53,7 +53,7 @@
     methods: {
       toggleGoal (value, text) {
         if (this.goals[value].name === text) {
-          this.goals[value].selected = this.goals[value].selected = this.goals[value].selected
+          this.goals[value].selected = this.goals[value].selected
             ? !this.goals[value].selected
             : Object.keys(getSelectedGoals(this.goals)).length < 4
               ? !this.goals[value].selected

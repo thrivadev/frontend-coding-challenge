@@ -4,5 +4,8 @@ export default {
   },
   saveGoals (state, goals) {
     state.goals = { ...goals }
+  },
+  saveDiet (state, diet) {
+    state.diet = { ...diet }
   }
 }

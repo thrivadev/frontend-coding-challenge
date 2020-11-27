@@ -2,6 +2,13 @@
   import CheckButton from '@/components/Survey/components/CheckButton'
   import ThvButton from '@/components/Shared/Button'
 
+// Move to helper and reuse in goals
+  const getSelectedDiet = (diet) => {
+    return Object.fromEntries(
+      Object.entries(diet).filter(([key, value]) => value.selected === true)
+    )
+  }
+
   export default {
     name: 'Diet',
     components: {
@@ -12,31 +19,53 @@
       return {
         diets: {
           no: {
-            name: 'No'
+            name: 'No',
+            value: 'no',
+            selected: false
           },
           coeliac: {
-            name: 'Coeliac'
+            name: 'Coeliac',
+            value: 'coeliac',
+            selected: false
           },
           lowCarbHighFat: {
-            name: 'Low-carb, high-fat'
+            name: 'Low-carb, high-fat',
+            value: 'lowCarbHighFat',
+            selected: false
           },
           paleo: {
-            name: 'Paleo'
+            name: 'Paleo',
+            value: 'paleo',
+            selected: false
           },
           pescatarian: {
-            name: 'Pescatarian'
+            name: 'Pescatarian',
+            value: 'pescatarian',
+            selected: false
           },
           plantBased: {
-            name: 'Plant-based'
+            name: 'Plant-based',
+            value: 'plantBased',
+            selected: false
           },
           other: {
-            name: 'Other'
+            name: 'Other',
+            value: 'other',
+            selected: false
           }
         }
       }
     },
     methods: {
+      selectDiet (value, text) {
+        Object.entries(this.diets).forEach(([key, value]) => {
+          this.diets[value.value].selected = value.name === text
+        })
+      },
       submit () {
+        const selectedDiet = getSelectedDiet(this.diets)
+  
+        this.$store.commit('survey/saveDiet', selectedDiet)
         this.$router.push('/dob')
       },
       back () {
@@ -52,7 +81,7 @@
       <div class="survey-questions__diet align-center">
         <h1>Do you follow a particular diet?</h1>
         <div class="spacer sp__top--sm"></div>
-        <check-button v-for="(diet, key) in diets" :key="key" :text="diet.name"></check-button>
+        <check-button @click="selectDiet" v-for="(diet, key) in diets" :key="key" :text="diet.name" :value="diet.value" :selected="diet.selected" ></check-button>
         <div class="grid-x button-container">
           <div class="cell auto">
             <div class="back-button-container">
