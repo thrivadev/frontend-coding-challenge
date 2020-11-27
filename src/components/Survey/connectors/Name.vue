@@ -15,6 +15,9 @@
     },
     methods: {
       submit () {
+        // Look into if this is best practice for dipatching actions from modules
+        // Check if this.name is the correct way to access data
+        this.$store.commit('survey/increment', this.name)
         this.$router.push('/goals')
       }
     }
