@@ -18,8 +18,9 @@
   }
 </script>
 
-<template>  
-  <div class="check-button" :class="{ 'check-button--selected': selected }" tabindex="0">
+<template>
+  <!-- is it poor practice to emit a click from a div  -->
+  <div class="check-button" :class="{ 'check-button--selected': selected }" tabindex="0" @click="$emit('click', value, text)">
     <p class="check-button__text body--large">{{ text }}</p>
   </div>
 </template>

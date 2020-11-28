@@ -13,8 +13,12 @@
         name: ''
       }
     },
+    mounted () {
+      this.$store.dispatch('progress/updateProgress', this.$options.name)
+    },
     methods: {
       submit () {
+        this.$store.dispatch('survey/saveName', this.name)
         this.$router.push('/goals')
       }
     }
