@@ -7,5 +7,8 @@ export default {
   },
   saveDiet (state, diet) {
     state.diet = { ...diet }
+  },
+  saveDob (state, dob) {
+    state.dob = dob
   }
 }

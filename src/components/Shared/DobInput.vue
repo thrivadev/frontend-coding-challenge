@@ -71,6 +71,7 @@
       }
     },
     watch: {
+      // Read up about watch
       dob (value) {
         this.$emit('input', value)
       }

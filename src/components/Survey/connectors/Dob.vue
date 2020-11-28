@@ -23,9 +23,14 @@
     methods: {
       submit () {
         this.$refs.DobInput.handleSubmit()
+        // This feels like bad practice
+        console.log(this.$refs.DobInput.$data)
+        // fix month indexing
+        const date = new Date(this.$refs.DobInput.$data.year, this.$refs.DobInput.$data.month, this.$refs.DobInput.$data.day)
         this.$validator.reset()
         this.$validator.validate().then(result => {
           if (result && !this.feedback) {
+            this.$store.commit('survey/saveDob', date.toISOString())
             this.$router.push('/success')
           }
         })
@@ -45,7 +50,7 @@
         <div class="spacer sp__top--sm"></div>
         <p class="body--large question-description">This helps us recommend the best test for you. We know it's a bit forward but our lips are sealed!</p>
         <div class="spacer sp__top--sm"></div>
-        <dob-input class="align-center survey-input" ref="DobInput" v-validate="'required'" data-vv-value-path="dob" :value="dob" name="dob" :error="errors.has('dob')" minAge="18" :feedback="feedback" @keyup.enter="submit" label=""></dob-input>
+        <dob-input class="align-center survey-input" ref="DobInput" v-validate="'required'" data-vv-value-path="dob" name="dob" :error="errors.has('dob')" minAge="18" :feedback="feedback" @keyup.enter="submit" label=""></dob-input>
         <div class="grid-x button-container">
           <div class="cell auto">
             <div class="back-button-container">

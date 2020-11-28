@@ -6,5 +6,9 @@ requirements are not met.
 
 I'm assuming it's better to inform the user as soon as possible if they've broken these rules. So while in the goals page make sure they can't have more than 4 goals. Doesn't say goals are needed so letting them progress with 0.
 
-Note to self: Could setup better fallback for no name? Look into persisting data over a reload
+
+Improvements that should be made:
+- Clicking back should show saved state. E.g. Going from Diet back to Goals, all selected Goals should still be selected.
+- Name restrictions? Don't allow numbers?
+
 
