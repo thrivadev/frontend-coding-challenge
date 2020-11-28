@@ -50,6 +50,9 @@
         }
       }
     },
+    mounted () {
+      this.$store.dispatch('progress/updateProgress', 1)
+    },
     methods: {
       toggleGoal (value, text) {
         if (this.goals[value].name === text) {
@@ -63,7 +66,7 @@
       submit () {
         const selectedGoals = getSelectedGoals(this.goals)
   
-        this.$store.commit('survey/saveGoals', selectedGoals)
+        this.$store.dispatch('survey/saveGoals', selectedGoals)
         this.$router.push('/diet')
       },
       back () {

@@ -13,11 +13,14 @@
         name: ''
       }
     },
+    mounted () {
+      this.$store.dispatch('progress/updateProgress', 0)
+    },
     methods: {
       submit () {
         // Look into if this is best practice for dipatching actions from modules
         // Check if this.name is the correct way to access data
-        this.$store.commit('survey/saveName', this.name)
+        this.$store.dispatch('survey/saveName', this.name)
         this.$router.push('/goals')
       }
     }

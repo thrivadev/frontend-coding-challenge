@@ -1,14 +1,14 @@
 export default {
-  saveName (state, name) {
+  SAVE_NAME (state, name) {
     state.name = name
   },
-  saveGoals (state, goals) {
+  SAVE_GOALS (state, goals) {
     state.goals = { ...goals }
   },
-  saveDiet (state, diet) {
+  SAVE_DIET (state, diet) {
     state.diet = { ...diet }
   },
-  saveDob (state, dob) {
+  SAVE_DOB (state, dob) {
     state.dob = dob
   }
 }

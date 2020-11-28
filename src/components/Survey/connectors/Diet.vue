@@ -56,6 +56,9 @@
         }
       }
     },
+    mounted () {
+      this.$store.dispatch('progress/updateProgress', 2)
+    },
     methods: {
       selectDiet (value, text) {
         Object.entries(this.diets).forEach(([key, value]) => {
@@ -65,7 +68,7 @@
       submit () {
         const selectedDiet = getSelectedDiet(this.diets)
   
-        this.$store.commit('survey/saveDiet', selectedDiet)
+        this.$store.dispatch('survey/saveDiet', selectedDiet)
         this.$router.push('/dob')
       },
       back () {

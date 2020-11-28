@@ -2,11 +2,16 @@
   import ThvButton from '@/components/Shared/Button'
   import DobInput from '@/components/Shared/DobInput'
 
+  const ConvertMonthToStartAtZero = (month) => (parseInt(month) - 1).toString()
+
   export default {
     name: 'Dob',
     components: {
       DobInput,
       ThvButton
+    },
+    mounted () {
+      this.$store.dispatch('progress/updateProgress', 3)
     },
     computed: {
       disableNext () {
@@ -23,14 +28,16 @@
     methods: {
       submit () {
         this.$refs.DobInput.handleSubmit()
-        // This feels like bad practice
-        console.log(this.$refs.DobInput.$data)
-        // fix month indexing
-        const date = new Date(this.$refs.DobInput.$data.year, this.$refs.DobInput.$data.month, this.$refs.DobInput.$data.day)
+        // Is using refs good practice here
+        const date = new Date(
+          this.$refs.DobInput.$data.year,
+          ConvertMonthToStartAtZero(this.$refs.DobInput.$data.month),
+          this.$refs.DobInput.$data.day
+        )
         this.$validator.reset()
         this.$validator.validate().then(result => {
           if (result && !this.feedback) {
-            this.$store.commit('survey/saveDob', date.toISOString())
+            this.$store.dispatch('survey/saveDob', date.toISOString())
             this.$router.push('/success')
           }
         })
