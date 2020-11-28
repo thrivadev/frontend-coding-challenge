@@ -1,13 +1,7 @@
 <script>
   import CheckButton from '@/components/Survey/components/CheckButton'
   import ThvButton from '@/components/Shared/Button'
-
-// Move to helper and reuse in goals
-  const getSelectedDiet = (diet) => {
-    return Object.fromEntries(
-      Object.entries(diet).filter(([key, value]) => value.selected === true)
-    )
-  }
+  import { getSelectedItems } from '../../../helpers/helpers'
 
   export default {
     name: 'Diet',
@@ -61,7 +55,7 @@
     },
     computed: {
       disableNext () {
-        return Object.keys(getSelectedDiet(this.diets)).length !== 1
+        return Object.keys(getSelectedItems(this.diets)).length !== 1
       }
     },
     methods: {
@@ -71,7 +65,7 @@
         })
       },
       submit () {
-        const selectedDiet = getSelectedDiet(this.diets)
+        const selectedDiet = getSelectedItems(this.diets)
   
         this.$store.dispatch('survey/saveDiet', selectedDiet)
         this.$router.push('/dob')

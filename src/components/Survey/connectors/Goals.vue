@@ -1,12 +1,7 @@
 <script>
   import CheckButton from '@/components/Survey/components/CheckButton'
   import ThvButton from '@/components/Shared/Button'
-
-  const getSelectedGoals = (goals) => {
-    return Object.fromEntries(
-      Object.entries(goals).filter(([key, value]) => value.selected === true)
-    )
-  }
+  import { getSelectedItems } from '../../../helpers/helpers'
 
   export default {
     name: 'Goals',
@@ -58,13 +53,13 @@
         if (this.goals[value].name === text) {
           this.goals[value].selected = this.goals[value].selected
             ? !this.goals[value].selected
-            : Object.keys(getSelectedGoals(this.goals)).length < 4
+            : Object.keys(getSelectedItems(this.goals)).length < 4
               ? !this.goals[value].selected
               : this.goals[value].selected
         }
       },
       submit () {
-        const selectedGoals = getSelectedGoals(this.goals)
+        const selectedGoals = getSelectedItems(this.goals)
   
         this.$store.dispatch('survey/saveGoals', selectedGoals)
         this.$router.push('/diet')
@@ -80,7 +75,6 @@
   <div class="grid-x grid-x-margin">
     <div class="cell small-12 medium-6 medium-offset-3">
       <div class="survey-questions__goals align-center">
-        <!-- Do I need a helper method around accessing the state? -->
         <h1>Nice to meet you {{ this.$store.getters["survey/getName"] }}. What would you like to focus on?</h1>
         <p class="body--large question-description">Choose up to four</p>
         <div class="spacer sp__top--sm"></div>
