@@ -2,7 +2,7 @@ import axios from 'axios'
 const API_URL = 'http://localhost:3000'
 
 export default {
-  async sendToApi (context, data) {
+  async sendToApi (context) {
     const body = {
       user: {
         name: context.getters['getName'],
