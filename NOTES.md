@@ -11,6 +11,7 @@ Disable Next if no Diet is selected
 
 
 Improvements that should be made:
+- Keyboard accessibility for choose goals and diets, should follow checkbox logic, space toggles selected
 - Clicking back should show saved state. E.g. Going from Diet back to Goals, all selected Goals should still be selected.
 - Name restrictions? Don't allow numbers?
 

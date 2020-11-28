@@ -3,8 +3,17 @@ const API_URL = 'http://localhost:3000'
 
 export default {
   async sendToApi (context, data) {
-    const body = {}
-    const config = { headers: { } }
+    const body = {
+      user: {
+        name: context.getters['getName'],
+        goals: context.getters['getGoals'],
+        diet: context.getters['getDiet'],
+        dob: context.getters['getDob']
+      }
+    }
+    const config = { headers: {
+      'Content-Type': 'application/json'
+    } }
     return axios.post(`${API_URL}/users`, body, config)
   },
   saveName (context, name) {

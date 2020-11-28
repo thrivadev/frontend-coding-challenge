@@ -38,7 +38,14 @@
         this.$validator.validate().then(result => {
           if (result && !this.feedback) {
             this.$store.dispatch('survey/saveDob', date.toISOString())
-            this.$router.push('/success')
+            this.$store.dispatch('survey/sendToApi')
+              .then(response => {
+                this.$router.push('/success')
+              })
+              .catch((error) => {
+                // Should display to user any errors they could fix, e.g. invalid name
+                console.error(error.response.data.error)
+              })
           }
         })
       },
@@ -65,7 +72,7 @@
             </div>
           </div>
           <div class="cell auto align-right">
-            <thv-button element="button" size="large" @click="submit">Next</thv-button>
+            <thv-button element="button" size="large" @click="submit" :disabled='disableNext'>Next</thv-button>
           </div>
         </div>
       </div>

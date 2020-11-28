@@ -59,6 +59,11 @@
     mounted () {
       this.$store.dispatch('progress/updateProgress', this.$options.name)
     },
+    computed: {
+      disableNext () {
+        return Object.keys(getSelectedDiet(this.diets)).length !== 1
+      }
+    },
     methods: {
       selectDiet (value, text) {
         Object.entries(this.diets).forEach(([key, value]) => {
@@ -92,7 +97,7 @@
             </div>
           </div>
           <div class="cell auto align-right">
-            <thv-button element="button" size="large" @click="submit">Next</thv-button>
+            <thv-button element="button" size="large" @click="submit" :disabled='disableNext'>Next</thv-button>
           </div>
         </div>
       </div>
