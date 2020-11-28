@@ -57,7 +57,7 @@
       }
     },
     mounted () {
-      this.$store.dispatch('progress/updateProgress', 2)
+      this.$store.dispatch('progress/updateProgress', this.$options.name)
     },
     methods: {
       selectDiet (value, text) {

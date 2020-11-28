@@ -2,7 +2,7 @@
   export default {
     name: 'Success',
     mounted () {
-      this.$store.dispatch('progress/updateProgress', 4)
+      this.$store.dispatch('progress/updateProgress', this.$options.name)
     },
     components: {
     },

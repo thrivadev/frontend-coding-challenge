@@ -14,7 +14,7 @@
       }
     },
     mounted () {
-      this.$store.dispatch('progress/updateProgress', 0)
+      this.$store.dispatch('progress/updateProgress', this.$options.name)
     },
     methods: {
       submit () {

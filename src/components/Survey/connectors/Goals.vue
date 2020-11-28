@@ -51,7 +51,7 @@
       }
     },
     mounted () {
-      this.$store.dispatch('progress/updateProgress', 1)
+      this.$store.dispatch('progress/updateProgress', this.$options.name)
     },
     methods: {
       toggleGoal (value, text) {
@@ -81,7 +81,7 @@
     <div class="cell small-12 medium-6 medium-offset-3">
       <div class="survey-questions__goals align-center">
         <!-- Do I need a helper method around accessing the state? -->
-        <h1>Nice to meet you {{ this.$store.state.survey.name }}. What would you like to focus on?</h1>
+        <h1>Nice to meet you {{ this.$store.getters["survey/getName"] }}. What would you like to focus on?</h1>
         <p class="body--large question-description">Choose up to four</p>
         <div class="spacer sp__top--sm"></div>
         <check-button @click="toggleGoal" v-for="(goal, key) in goals" :key="key" :text="goal.name" :value="goal.value" :selected="goal.selected" ></check-button>

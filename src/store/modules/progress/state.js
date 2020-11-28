@@ -1,5 +1,6 @@
 const state = () => ({
-  step: 0
+  currentStep: '',
+  totalSteps: ['Name', 'Goals', 'Diet', 'Dob', 'Success']
 })
 
 export default state

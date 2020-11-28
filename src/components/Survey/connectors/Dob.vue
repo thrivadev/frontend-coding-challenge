@@ -11,7 +11,7 @@
       ThvButton
     },
     mounted () {
-      this.$store.dispatch('progress/updateProgress', 3)
+      this.$store.dispatch('progress/updateProgress', this.$options.name)
     },
     computed: {
       disableNext () {
