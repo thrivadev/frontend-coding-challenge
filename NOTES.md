@@ -1,22 +1,23 @@
 # Notes
 
-> The user can select up to 4 goals but only 1 diet.
-> The users should not be able to progress to the next stage if the above
-requirements are not met.
+This has been a really interesting intro to vue, thanks whoever designed this challenege.
 
-I'm assuming it's better to inform the user as soon as possible if they've broken these rules. So while in the goals page make sure they can't have more than 4 goals. Doesn't say goals are needed so letting them progress with 0.
+It's better to inform the user as soon as possible if they've broken the 1 diet and 0-4 goals rule. So while in the goals page make sure they can't have more than 4 goals and that they can't progress if they haven't selected 1 diet. Doesn't say goals are required so I'm letting them progress with 0.
 
-Testing
-There isn't much point testing the result of sendToApi if I am mocking the response
-Adding test to getters as they're not tested in the sendToApi test, would be nice to us real functions but not sure how
-
-Old TODOs
-Disable Next if no Diet is selected
+### Testing:
+There isn't much point testing the result of sendToApi if I am mocking the response.
+I added test to the getters as they're not tested in the `sendToApi` test, would be nice to use the getters without mocking them in the `sendToApi` test, not sure how to implement this though. 
 
 
-Improvements that should be made:
-- Extend Checkbutton to be disabled when 4 selected values have been chosen
-- Keyboard accessibility for choose goals and diets, should follow checkbox logic, space toggles selected
+### Improvements:
+- Extend Checkbutton to be disabled when 4 selected values have been chosen.
+- Keyboard accessibility for choose goals and diets needs improving, it should follow checkbox logic, with space toggling the selected state.
+- Voice accessibility, aria-labels are needed to give context to voice over users.
 - Clicking back should show saved state. E.g. Going from Diet back to Goals, all selected Goals should still be selected.
-- Name restrictions? Don't allow numbers?
+  - This could be implemented with the mounted hook/method, checking the store as it's mounted.
+- Storing the submitted values in a session cookie or localhost to avoid losing data if the user refreshes. 
+- Name restrictions, don't allow numbers?
+- Redirect to /name on /success if any data is missing
+  - Even better redirect to the earliest missing peice of data
+- Add E2E testing
 
